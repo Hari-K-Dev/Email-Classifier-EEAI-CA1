@@ -21,7 +21,14 @@ class BaseModel(ABC):
     @abstractmethod
     def predict(self) -> int:
         """
+        Make predictions on test data.
+        """
+        ...
 
+    @abstractmethod
+    def print_results(self, data) -> None:
+        """
+        Print classification report for model evaluation.
         """
         ...
 
@@ -29,9 +36,7 @@ class BaseModel(ABC):
     def data_transform(self) -> None:
         return
 
-    # def build(self, values) -> BaseModel:
     def build(self, values={}):
-        values = values if isinstance(values, dict) else utils.string2any(values)
-        self.__dict__.update(self.defaults)
+        values = values if isinstance(values, dict) else {}
         self.__dict__.update(values)
         return self
