@@ -32,6 +32,7 @@ def get_data_object(X: np.ndarray, df: pd.DataFrame):
 
 def perform_modelling(data: Data, df: pd.DataFrame, name):
     model_predict(data, df, name)
+
 # Code will start executing from following line
 if __name__ == '__main__':
     
@@ -43,8 +44,9 @@ if __name__ == '__main__':
     
     # data transformation
     X, group_df = get_embeddings(df)
+
     # data modelling
     data = get_data_object(X, df)
-    # modelling
-    perform_modelling(data, df, 'name')
 
+    # chained multi-output modelling (Design Choice 1)
+    perform_modelling(data, df, 'RandomForest')
