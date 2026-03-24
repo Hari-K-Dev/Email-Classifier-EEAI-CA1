@@ -23,7 +23,7 @@ class RandomForest(BaseModel):
         self.model_name = model_name
         self.embeddings = embeddings
         self.y = y
-        self.mdl = RandomForestClassifier(n_estimators=1000, random_state=seed, class_weight='balanced_subsample')
+        self.mdl = RandomForestClassifier(n_estimators=100, random_state=seed, class_weight='balanced_subsample')
         self.predictions = None
         self.data_transform()
 

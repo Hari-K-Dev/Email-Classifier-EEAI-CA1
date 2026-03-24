@@ -30,11 +30,13 @@ class Data():
 
         # Remove rare classes
         df_clean = remove_rare_classes(df.copy(), target_col, threshold=Config.RARE_THRESHOLD)
-        df_clean = df_clean.reset_index(drop=True)
 
-        # Filter X to match surviving rows
-        valid_indices = df_clean.index.tolist()
-        X_clean = X[valid_indices] if len(valid_indices) < len(X) else X[:len(df_clean)]
+        # Save original row indices into X BEFORE resetting the index
+        # (after reset_index, indices become 0,1,2,... which would wrongly slice X)
+        orig_indices = df_clean.index.tolist()
+        X_clean = X[orig_indices]
+
+        df_clean = df_clean.reset_index(drop=True)
 
         # Extract target
         self.y = df_clean[target_col].values
